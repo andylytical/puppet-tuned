@@ -10,7 +10,7 @@ Facter.add('tuned_version') do
     out = Facter::Core::Execution.exec('tuned --version 2>&1')
     if out && out =~ %r{^tuned ([\d\.]+)$}i
       Regexp.last_match(1)
-    elsif !Facter::Core::Execution.exec('which tuned 2>/dev/null').empty?
+    elsif Facter::Core::Execution.exec('which tuned 2>/dev/null')
       'unknown'
     end
   end
